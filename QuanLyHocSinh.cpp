@@ -296,7 +296,8 @@ class quanlyHS{
             void TimKiemID(string &h);	
             void SapXepDTB();
             void SapXepName();
-            void XepLoaiHS(); 	
+            void XepLoaiHS();
+			void XepLoaiHSG(); 	
             void exportHS(ofstream &file); 
             bool check (string h);
 };
@@ -345,6 +346,16 @@ void quanlyHS:: XuatDS(){
 		 stt++;
 	}
 } 
+void quanlyHS::XepLoaiHSG(){
+	XuatThongTinChung2();
+	for(int i = 0;i < this->HS.size();i ++){
+		if(HS.at(i)->getDTB() >= 8){
+			HS.at(i)->Xuat5(); cout<<setw(15)<<left<<"GIOI \n";
+            cout<<"\t\t\t"<<setfill('-')<<setw(150)<<"-"<<endl;
+            cout<<setfill(' ');
+		} 
+	} 
+} 
 void quanlyHS::SapXepDTB(){
 	for(int i = 0 ;i < this->HS.size()-1;i++){
 		for(int j = i+1; j< this->HS.size();j++ ){
@@ -380,7 +391,6 @@ void quanlyHS::XoaHSID(string H){
         }
     }    
 }
-
 
      
 void quanlyHS::XepLoaiHS(){
@@ -425,6 +435,7 @@ void quanlyHS::TimKiemID(string &h){
 		}
 	}
 }
+
 void quanlyHS::exportHS(ofstream &file){
     int stt = 1;
     file<<endl<<"THONG TIN HOC SINH \n"<<endl;
@@ -462,6 +473,7 @@ void menu(){
         cout  << "**              6. Xep loai hoc sinh.                            **\n";  
         cout  << "**              7. Sap xep hoc sinh theo ten.                    **\n";
         cout  << "**              8. Ghi danh sach hoc sinh vao file.              **\n";
+        cout  << "**              9. Xuat thong tin hoc sinh gioi                  **\n";
         cout  << "**              0. Thoat.                                        **\n";
         cout  << "*******************************************************************\n";
         cout  << "                         Nhap tuy chon: ";
@@ -571,6 +583,18 @@ void menu(){
              	system("cls");
                 k.exportHS(file);
                 break;
+            case 9:
+            		system("cls");
+			        if(daNhap){
+                       cout<<"\n\n Ban da chon xuat thong tin hoc sinh gioi: " ;  
+					   k.XepLoaiHSG();               
+				    }
+			         else{
+                       cout<<"Nhap danh sach hoc sinh truoc!!!!";
+                     }
+                      cout<<"\nBam phim bat ky de tiep tuc!";
+                      getch();
+                      break;
             case 0:
 		            printf("\n BAN DA CHON THOAT CHUONG TRINH!");
 		            flat = 0;
